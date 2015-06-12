@@ -1,5 +1,0 @@
-- moved "application" and "system" folder outside public "www" directory for security reasons
-- updated "application" and "system" path in index.html file
-- created "development" and "production" folder inside "application/config", which will include specific configuration files, based on ENVIRONMENT variable (if set to "development", then development config folder specific files will be loaded)
-- creating MY_Controller (application/core) which will include commonly used things (already created "data" array, loaded "data[site_name]" variable)
-- created "Admin_controller" and "Frontend_controller", from these files will extend frontend, or admin pages (
