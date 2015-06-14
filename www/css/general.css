@@ -1,0 +1,39 @@
+/* fix bootstrap navbar overlaying body content when it has position fixed to top */
+body{ 
+	padding-top: 70px;
+}
+
+
+.rounded-corners-sm{
+	border-radius: 3px;
+}
+.rounded-corners-md{
+	border-radius: 5px;
+}
+
+
+.container{
+	padding-bottom: 20px;
+	background-color: #F7F7F7;
+}
+
+
+.form-editUser{
+	width: 50%;
+}
+
+
+.btnEditUser, .btnDeleteUser{
+	font-size: 17px;
+}
+
+.btnDeleteUser{
+	color: #D11919;
+}
+
+
+/* override default bootstrap table-striped color */
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #DDD;
+ }

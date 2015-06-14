@@ -2,4 +2,20 @@
 - updated "application" and "system" path in index.html file
 - created "development" and "production" folder inside "application/config", which will include specific configuration files, based on ENVIRONMENT variable (if set to "development", then development config folder specific files will be loaded)
 - creating MY_Controller (application/core) which will include commonly used things (already created "data" array, loaded "data[site_name]" variable)
-- created "Admin_controller" and "Frontend_controller", from these files will extend frontend, or admin pages (
+- created "Admin_controller" and "Frontend_controller", from these files will extend frontend, or admin pages things that are specific for these files
+- added custom "__autoload" function into file config.php in "application/config", which will include also custom libraries from "application/libraries"
+- configured "application/config/migration.php"  "migration_type" as "sequential",  "migration_version" as "1", "migration_enabled" as "true"
+- created migration for version "1" in "application/migrations" as "001_createUsers.php" which will create users table
+- runned migration with version 1 (created table users)
+- created migration "002_createPages" which will create page table 
+- changed migration version to "2"
+- runned migration with version 2 (created table pages)
+
+
+
+
+
+- spravit css(SAMOSTATNY SUBOR) pre .btnEditUser, .btnDeleteUser, tabulku #usersTable (stripped?)
+ok
+
+- treba to spravit ako to on robi vo videach, teda jeden view "_layout_admin" a potom dalsie ktore budu iba contentom v tomto layoute, teda "admin_users", "admin_pages", "admin_edit", ... a tieto nazvy contentov sa budu posielat do "_layout_admin" v premennej "contentView" (on to posiela ako subview)
