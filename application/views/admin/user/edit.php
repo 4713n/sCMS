@@ -33,7 +33,7 @@
     	        	<label for="password" class="control-label">
                     <?php echo ( !empty($user->id) ) ? 'New password' : 'Password'; ?>      
                     </label>
-    	            <input type="password" class="editUserInput form-control input-md" name="password" placeholder="<?php echo ( !empty($user->id) ) ? '(Leave blank if dont want to change)' : 'Password'; ?>" />
+    	            <input type="password" class="editUserInput form-control input-md" name="password" placeholder="<?php echo ( !empty($user->id) ) ? '(Leave blank, if dont want to change)' : 'Password'; ?>" />
 
     	        </div>
             </div>
@@ -43,7 +43,7 @@
                     <label for="password_confirm" class="control-label">
                         <?php echo ( !empty($user->id) ) ? 'Confirm new password' : 'Confirm password'; ?>    
                     </label>
-    	            <input type="password" class="editUserInput form-control input-md" name="password_confirm" placeholder="<?php echo ( !empty($user->id) ) ? '(Leave blank if dont want to change)' : 'Confirm password'; ?>" />
+    	            <input type="password" class="editUserInput form-control input-md" name="password_confirm" placeholder="<?php echo ( !empty($user->id) ) ? '(Leave blank, if dont want to change)' : 'Confirm password'; ?>" />
     	        </div>
             </div>
 

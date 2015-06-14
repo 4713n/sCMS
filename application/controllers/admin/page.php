@@ -54,33 +54,20 @@ class Page extends Admin_Controller{
 		}
 
 
-		$rules_admin = $this->page_model->rules_admin;
-
-		//if adding a new page (id=null), then add "required" rule for password
-		if($id == NULL)
-			$rules_admin['password']['rules'] = $rules_admin['password']['rules'] . '|required';
-
-		$this->form_validation->set_rules($rules_admin);
+		$this->form_validation->set_rules( $this->page_model->rules );
 
 
 		if($this->form_validation->run() == TRUE){
+			
+			$data = $this->page_model->arrayFromPost(['title', 'body', 'slug']);
+
 			//new page
 			if($id==NULL){
-				$data = $this->page_model->arrayFromPost(['name', 'email', 'password']);
-				$data['password'] = $this->page_model->hashPassword($data['password']);
 				$this->page_model->create($data);
 			}
 			
 			//edit page
 			else{
-				if( strlen(trim($this->data['password'])) > 0 ){ //if new password is set
-					$data = $this->page_model->arrayFromPost(['name', 'email', 'password']);
-					$data['password'] = $this->page_model->hashPassword($data['password']);
-				}
-				else{ //new pwd not set, let password without changes
-					$data = $this->page_model->arrayFromPost(['name', 'email']);
-				}
-
 				$this->page_model->update($id, $data);
 			}
 
@@ -98,83 +85,29 @@ class Page extends Admin_Controller{
 	}
 
 
-	public function login(){
-
-		//redirect, if already logged in
-		if( $this->page_model->isLoggedIn() ){
-			redirect('admin/controlpanel');
-		}
-
-		$rules = $this->page_model->rules;
-		$this->form_validation->set_rules($rules);
-
-		if($this->form_validation->run() == TRUE){
-			if($this->page_model->login()){
-				redirect('admin/controlpanel');
-			}
-			else{
-				$this->session->set_flashdata('loginError', 'Wrong pagename/password');
-				redirect('admin/page/login');
-			}
-		}
-	
-		$this->data['page_title'] = 'sCMS Login [Admin]';
-		$this->load->view('admin/_layout_login', $this->data);
-	}
-
-
-	public function logout(){
-		$this->page_model->logout();
-
-		redirect('admin/page/login');
-	}
-
-
 	/* function with "_" prefix (for example "public function _uniqueName()") is NOT accessible from URL
 	   private functions are also hidden from url, but for this specific function it needs to be done via 
 	   "_" prefix (works only with codeigniter), because this fn needs to be called from other class and that 
 	   cant be done when fn is private */
-	public function _uniqueName($string=NULL){
-		/* check if given name exists, but current page is exception */
+	public function _uniqueSlug($string=NULL){
+		/* check if given slug exists, except slug is for current page */
 		
-		$this->db->where('name', $this->input->post('name'));
+		$this->db->where('slug', $this->input->post('slug'));
 
-		//..except name of current page (segment 4 contains page id)
-		if( $this->uri->segment(4) ){
+		//..exclude slug for current page (segment 4 contains current page id)
+		if( $this->uri->segment(4) )
 			$this->db->where('id !=', $this->uri->segment(4));
-		}
 
-		$page = $this->page_model->get(NULL, TRUE); //no id (get by where condition), limit single=true (one match is sufficient for this)
+		$page = $this->page_model->get(NULL); //no id (get by where condition)
 
 		if(count($page) > 0){
-			$this->form_validation->set_message('_uniqueName', '<span style="color:red">%s is already taken. Choose other one.</span>');
+			$this->form_validation->set_message('_uniqueSlug', '<span style="color:red">%s must be unique. Choose other one.</span>');
 			return FALSE;
 		}
 		else
 			return TRUE;
 	}
 
-
-	public function _uniqueEmail($string=NULL){
-		/* check if given email exists, but current page is exception */
-
-		$this->db->where('email', $this->input->post('email'));
-		
-		//..except email of current page (segment 4 contains page id)
-		if( $this->uri->segment(4) ){
-			$this->db->where('id !=', $this->uri->segment(4));
-		}
-
-		$page = $this->page_model->get(NULL, TRUE); //no id (get by where condition), limit single=true (one match is sufficient for this)
-		echo var_dump($page);
-
-		if(count($page) > 0){
-			$this->form_validation->set_message('_uniqueEmail', '<span style="color:red">%s is already registered. Choose other one.</span>');
-			return FALSE;
-		}
-		else
-			return TRUE;
-	}
 }
 
  ?>

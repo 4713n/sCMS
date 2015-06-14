@@ -17,9 +17,15 @@
 	    	<!-- Collect the nav links, forms, and other content for toggling -->
 	    	<div class="collapse navbar-collapse" id="navbar-content">
 	      		<ul class="nav navbar-nav">
-	        		<li class="active"><a href="<?php echo site_url('admin/controlpanel'); ?>">Control Panel <span class="sr-only">(current)</span></a></li>
-	        		<li><a href="<?php echo site_url('admin/page'); ?>">Pages</a></li>
-	        		<li><a href="<?php echo site_url('admin/user'); ?>">Users</a></li>
+	        		<li class="<?php echo (strpos(uri_string(), 'admin/controlpanel')!==false) ? 'active' : '' ; ?>">
+	        			<a href="<?php echo site_url('admin/controlpanel'); ?>">Control Panel <span class="sr-only">(current)</span></a>
+	        		</li>
+	        		<li class="<?php echo (strpos(uri_string(), 'admin/page')!==false) ? 'active' : '' ; ?>">
+	        			<a href="<?php echo site_url('admin/page'); ?>">Pages</a>
+	        		</li>
+	        		<li class="<?php echo (strpos(uri_string(), 'admin/user')!==false) ? 'active' : '' ; ?>">
+	        			<a href="<?php echo site_url('admin/user'); ?>">Users</a>
+	        		</li>
 	        	</ul>
 	        
 	        	<ul class="nav navbar-nav navbar-right">
