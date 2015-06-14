@@ -1,0 +1,13 @@
+#editPageSubmitDiv{
+	text-align: right;
+}
+
+.form-editPage{
+	display: inline-block;
+	text-align: left;
+	width: 100%;
+}
+
+#editPageBody{
+	resize: vertical;
+}
